@@ -13,8 +13,10 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
           integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
 </head>
 <body>
+
 <!--верхнее черное окошко "myProjeckt"-->
 <div class="navbar navbar-inverse navbar-fixed-top ">
     <div class="container">
@@ -31,12 +33,13 @@
                             <nav class="navbar navbar-default navbat-left jumbotron" role="navigation">
                                 <div class="container-fluid">
                                     <div class="navbar-header">
-                                        <a class="navbar-brand" href="#">itProger</a>
+                                        <a class="navbar-brand" href="#">almazbekov</a>
                                     </div>
                                     <div class="container">
                                         <ul class="nav nav-pills" role="tablist">
                                             <li class="active"><a href="#mainTableHtml" role="tab" data-toggle="pill">User table</a></li>
                                             <li><a href="#MainNewUser" role="tab" data-toggle="pill">New User</a></li>
+                                            <li><a href="/logout" > logout</a></li>
                                         </ul>
                                         <div class="tab-content">
                                             <div role="tabpanel" class="tab-pane active fade in" id="mainTableHtml">
@@ -191,11 +194,334 @@
     </div>
 </div>
 
-<script src="./mainTable.js"></script>
-<script src="./mainNewUser.js"></script>
-<script src="./editUser.js"></script>
-<script src="./deleteUser.js"></script>
-<script src="./mainRedirect.js"></script>
+
+
+
+<script>
+    //deleteUser
+    function getUserDelete(id, firstName, lastName, age, email) {
+        let idMain, firstNameMain, lastNameMain, ageMain, emailMain;
+        idMain = id;
+        firstNameMain = firstName;
+        lastNameMain = lastName;
+        ageMain = age;
+        emailMain = email;
+
+        console.log("testDelete")
+        let html = `
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal">х</button>
+                    <h4 class="modal-title">Заголовок окна</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <form role="form" class="form-horizontal" id="MainDeleteFinish">
+                            <div class="form-group">
+                                <label for="MainFirstNameDelete" class="control-label col-md-2">First Name</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" id="MainFirstNameDelete" placeholder=${firstNameMain}>
+<!--                                                    <p class="help-block">Некая подсказка</p>-->
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="MainLastNameDelete" class="control-label col-md-2">Last Name</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" id="MainLastNameDelete" placeholder=${lastNameMain}>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="MainAgeDelete" class="control-label col-md-2">Age</label>
+                                <div class="col-md-6">
+                                    <input type="number" class="form-control" id="MainAgeDelete" placeholder=${ageMain}>
+                                    <!--                <p class="help-block">Некая подсказка</p>-->
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="MainEmailDelete" class="control-label col-md-2">Email</label>
+                                <div class="col-md-6">
+                                    <input type="email" class="form-control" id="MainEmailDelete" placeholder=${emailMain}>
+                                    <!--                <p class="help-block">Некая подсказка</p>-->
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="MainPasswordDelete" class="control-label col-md-2">Password</label>
+                                <div class="col-md-6">
+                                    <input type="password" class="form-control" id="MainPasswordDelete" placeholder=password>
+                                    <!--                <p class="help-block">Некая подсказка</p>-->
+                                </div>
+                            </div>
+                            <div style="padding-left: 189px" class="col-md-6">
+                                <select class="form-control ">
+                                    <option>User</option>
+                                    <option>Admin</option>
+                                </select>
+                            </div>
+                            <br><br>
+                            <div style="padding-left: 189px">
+                                <button type="submit" class="btn btn-success"  >Delete</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-danger" data-dismiss="modal">Закрыть</button>
+                </div>
+            </div>
+        </div>
+`;
+        document.querySelector("#DeleteModal").insertAdjacentHTML("afterbegin",html);
+        editUser = document.getElementById('MainDeleteFinish');
+
+        editUser.addEventListener('submit',async function (event) {
+            event.preventDefault()
+            const deleteMethod = {
+                method: 'DELETE', // Method itself
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8' // Indicates the content
+                },
+            }
+
+            url = `http://localhost:8080/admin/${idMain}`;
+            fetch(url, deleteMethod)
+                .catch(err => console.log(err)) // Do something with the error
+            MainRedirect();
+        })
+    }
+
+    //editUser
+    let idMain, firstNameMain, lastNameMain, ageMain, emailMain;
+    let putMethod;
+    let editUser;
+
+    function getUserEdit(id, firstName, lastName, age, email) {
+        idMain = id;
+        firstNameMain = firstName;
+        lastNameMain = lastName;
+        ageMain = age;
+        emailMain = email;
+        console.log("testGeeUser")
+        let html = `        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal">х</button>
+                    <h4 class="modal-title">Заголовок окна</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <form role="form" class="form-horizontal" id="MainEditFinish">
+                            <div class="form-group">
+                                <label for="MainFirstNameEdit" class="control-label col-md-2">First Name</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" id="MainFirstNameEdit" placeholder=${firstNameMain}>
+<!--                                                    <p class="help-block">Некая подсказка</p>-->
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="MainLastNameEdit" class="control-label col-md-2">Last Name</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" id="MainLastNameEdit" placeholder=${lastNameMain}>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="MainAgeEdit" class="control-label col-md-2">Age</label>
+                                <div class="col-md-6">
+                                    <input type="number" class="form-control" id="MainAgeEdit" placeholder=${ageMain}>
+                                    <!--                <p class="help-block">Некая подсказка</p>-->
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="MainEmailEdit" class="control-label col-md-2">Email</label>
+                                <div class="col-md-6">
+                                    <input type="email" class="form-control" id="MainEmailEdit" placeholder=${emailMain}>
+                                    <!--                <p class="help-block">Некая подсказка</p>-->
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="MainPasswordEdit" class="control-label col-md-2">Password</label>
+                                <div class="col-md-6">
+                                    <input type="password" class="form-control" id="MainPasswordEdit" placeholder=password>
+                                    <!--                <p class="help-block">Некая подсказка</p>-->
+                                </div>
+                            </div>
+                            <div style="padding-left: 189px" class="col-md-6">
+                                <select class="form-control ">
+                                    <option>User</option>
+                                    <option>Admin</option>
+                                </select>
+                            </div>
+                            <br><br>
+                            <div style="padding-left: 189px">
+                                <button type="submit" class="btn btn-success"  >Edit</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-danger" data-dismiss="modal">Закрыть</button>
+                </div>
+            </div>
+        </div>
+`;
+        document.querySelector("#EditModal").insertAdjacentHTML("afterbegin",html);
+        editUser = document.getElementById('MainEditFinish');
+
+        editUser.addEventListener('submit',async function (event) {
+            event.preventDefault()
+            let emailEdit = document.getElementById('MainEmailEdit').value;
+            let passwordEdit = document.getElementById('MainPasswordEdit').value;
+            let firstNameEdit = document.getElementById('MainFirstNameEdit').value;
+            let lastNameEdit = document.getElementById('MainLastNameEdit').value;
+            let ageEdit = document.getElementById('MainAgeEdit').value;
+            const someData = {
+                email: getTest(emailEdit,email),
+                password: getTest(passwordEdit,passwordEdit),
+                firstName: getTest(firstNameEdit,firstName),
+                lastName: getTest(lastNameEdit,lastName),
+                age: getTest(ageEdit,age)
+            }
+            function getTest(name1,name2){
+                if (name1.length === 0){
+                    return name2;
+                    console.log("if else")
+                }else return name1;
+            }
+
+            putMethod = {
+                method: 'PUT', // Method itself
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8' // Indicates the content
+                },
+                body: JSON.stringify(someData) // We send data in JSON format
+            }
+
+            console.log("editUser")
+            url = `http://localhost:8080/admin/${idMain}`;
+            fetch(url, putMethod)
+                .then(response => response.json())
+                .then(data => console.log(data)) // Manipulate the data retrieved back, if we want to do something with it
+                .catch(err => console.log(err))
+            console.log("test redirect");
+            MainRedirect();
+        })
+    }
+
+    //mainNewUser
+    const register = document.getElementById('MainRegister');
+
+    let url = 'http://localhost:8080/admin/';
+    register.addEventListener('submit',async function (event) {
+        event.preventDefault()
+
+        let email = document.getElementById('MainEmail').value;
+        let password = document.getElementById('MainPassword').value;
+        let firstName = document.getElementById('MainFirstName').value;
+        let lastName = document.getElementById('MainLastName').value;
+        let age = document.getElementById('MainAge').value;
+        console.log(email);
+        console.log(password);
+        console.log(firstName);
+        console.log(lastName);
+        console.log(age);
+        addUser({
+            email: email,
+            password: password,
+            firstName: firstName,
+            lastName: lastName,
+            age: age
+        })
+        MainRedirect();
+    });
+    async function addUser(Obj) {
+        let response = await fetch(url, {
+            method: "POST",
+            headers: {
+                'Content-Type':'application/json'
+            },
+            body: JSON.stringify(Obj)
+
+
+        })
+        let answer = await response.json();
+        console.log(answer);
+    }
+
+    //mainRedirect
+    function MainRedirect() {
+        console.log('MainRedirect');
+        setTimeout(redirectPage, 100);
+    }
+    function redirectPage() {
+        console.log("redirectPage")
+        // document.location.href = 'admin.html'
+        document.location.href = 'http://localhost:8080/api/admin';
+        // document.location.href = 'http://localhost:8080/';
+    }
+
+    // mainTable
+    function fetchData() {
+        fetch("http://localhost:8080/admin")
+            .then(response =>{
+                if (!response.ok){
+                    throw Error("error");
+                }
+                // console.log(response.json());
+                return response.json();
+            })
+            .then(data => {
+                // console.log(data);
+                let html =  '<div class="container">\n' +
+                    '           <div class="table-responsive table-">\n' +
+                    '              <table class="table table-striped1 table-hover1 table-bordered1 table-condensed">\n' +
+                    '                <thead>\n' +
+                    '                  <tr class="active">\n' +
+                    '                     <th>id</th>\n' +
+                    '                     <th>firstName</th>\n' +
+                    '                     <th>lastName</th>\n' +
+                    '                     <th>age</th>\n' +
+                    '                     <th>email</th>\n' +
+                    '                     <th>role</th>\n' +
+                    '                     <th >Edit</th>\n' +
+                    '                     <th>Delete</th>\n' +
+                    '                  </tr>\n' +
+                    '                </thead>\n' +
+                    '                <tbody>';
+                html= html + data
+                    .map(user => {
+                        return `
+                    <tr>
+                       <td>${user.id}</td>
+                       <td>${user.firstName}</td>
+                       <td>${user.lastName}</td>
+                       <td>${user.age}</td>
+                       <td>${user.email}</td>
+                       <td>Admin</td>
+                       <td>
+                           <button id="MainEdit" value="value"
+                           onclick="getUserEdit(${user.id},'${user.firstName}','${user.lastName}',${user.age},'${user.email}')"
+                                    class="btn btn-info" data-toggle="modal" data-target="#myModalEdit">Edit</button>
+                       </td>
+                       <td>
+                           <button id="MainDelete" value="value"
+                           onclick="getUserDelete(${user.id},'${user.firstName}','${user.lastName}',${user.age},'${user.email}')"
+                                    class="btn btn-warning" data-toggle="modal" data-target="#myModalDelete">Delete</button>
+                       </td>
+                    </tr>
+                    `;
+                    })
+                    .join("");
+                document.querySelector("#mainTable").insertAdjacentHTML("afterbegin",html);
+            })
+            .catch(err => {
+                console.log(err+" error you ");
+            })
+    }
+    fetchData();
+
+</script>
 
 <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>

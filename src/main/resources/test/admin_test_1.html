@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+</head>
+<body>
+
+<!--верхнее черное окошко "myProjeckt"-->
+<div class="navbar navbar-inverse navbar-fixed-top ">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">myProject</a>
+            <div class="container">
+                <ul class="nav nav-pills" role="tablist">
+                    <li class="active"><a href="#home" role="tab" data-toggle="pill">Admin</a></li>
+                    <li><a href="#profile" role="tab" data-toggle="pill">User</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade active in" id="home">
+                        <div>
+                            <nav class="navbar navbar-default navbat-left jumbotron" role="navigation">
+                                <div class="container-fluid">
+                                    <div class="navbar-header">
+                                        <a class="navbar-brand" href="#">itProger</a>
+                                    </div>
+                                    <div class="container">
+                                        <ul class="nav nav-pills" role="tablist">
+                                            <li class="active"><a href="#mainTableHtml" role="tab" data-toggle="pill">User table</a></li>
+                                            <li><a href="#MainNewUser" role="tab" data-toggle="pill">New User</a></li>
+                                        </ul>
+                                        <div class="tab-content">
+                                            <div role="tabpanel" class="tab-pane active fade in" id="mainTableHtml">
+                                                <!--User table "mainTable.js" -->
+                                                <div id="mainTable">
+
+                                                </div>
+                                            </div>
+                                            <!--  новый пользователь-->
+                                            <div role="tabpanel" class="tab-pane fade" id="MainNewUser">
+
+
+                                                <div class="container">
+                                                    <form role="form" class="form-horizontal" id="MainRegister">
+                                                        <div class="form-group">
+                                                            <label for="MainEmail" class="control-label col-md-2">Email</label>
+                                                            <div class="col-md-6">
+                                                                <input type="teче" class="form-control" id="MainEmail" placeholder="введите email"
+                                                                       required="required">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="MainPassword" class="control-label col-md-2">Password</label>
+                                                            <div class="col-md-6">
+                                                                <input type="password" class="form-control" id="MainPassword" placeholder="введите пароль"
+                                                                       required="required">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="MainFirstName" class="control-label col-md-2">First Name</label>
+                                                            <div class="col-md-6">
+                                                                <input type="text" class="form-control" id="MainFirstName" placeholder="введите имя"
+                                                                       required="required">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="MainLastName" class="control-label col-md-2">Last Name</label>
+                                                            <div class="col-md-6">
+                                                                <input type="text" class="form-control" id="MainLastName" placeholder="введите фамилию"
+                                                                       required="required">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="MainAge" class="control-label col-md-2">Age</label>
+                                                            <div class="col-md-6">
+                                                                <input type="number" class="form-control" id="MainAge" placeholder="введите возраст"
+                                                                       required="required">
+                                                            </div>
+                                                        </div>
+
+                                                        <div style="padding-left: 189px" class="col-md-6">
+                                                            <select class="form-control ">
+                                                                <option name="user">User</option>
+                                                                <option name="admin">Admin</option>
+                                                            </select>
+                                                        </div>
+                                                        <br><br>
+                                                        <div style="padding-left: 189px">
+                                                            <button type="submit" class="btn btn-success">
+                                                                Регистрация
+                                                            </button>
+                                                        </div>
+
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                    <!--                    обо мне-->
+                    <div role="tabpanel" class="tab-pane fade" id="profile">
+                        <div>
+                            <nav class="navbar navbar-default navbat-left jumbotron" role="navigation">
+                                <div class="container-fluid">
+                                    <div class="navbar-header">
+                                        <a class="navbar-brand" href="#">itProger</a>
+                                    </div>
+                                    <div class="container">
+                                        <ul class="nav nav-pills" role="tablist">
+                                            <li class="active"><a href="#messageUser" role="tab" data-toggle="pill">User</a></li>
+                                        </ul>
+                                        <div class="tab-content">
+                                            <div role="tabpanel" class="tab-pane active fade in" id="messageUser">
+
+
+
+                                                <div class="container">
+                                                    <div class="table-responsive table-">
+                                                        <table class="table table-striped1 table-hover1 table-bordered1 table-condensed">
+                                                            <thead>
+                                                            <tr class="active">
+                                                                <th>id</th>
+                                                                <th>firstName</th>
+                                                                <th>lastName</th>
+                                                                <th>age</th>
+                                                                <th>email</th>
+                                                                <th>role</th>
+                                                                <th >Edit</th>
+                                                                <th>Delete</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <tr>
+                                                                <td>1</td>
+                                                                <td>Bill</td>
+                                                                <td>Jimmy</td>
+                                                                <td>14</td>
+                                                                <td>Jbill@gmail.com</td>
+                                                                <td>Admin</td>
+                                                                <td>
+
+                                                                    <button class="btn"><a href="#">Edit</a></button>
+                                                                </td>
+                                                                <td>
+                                                                    <button class="btn"><a href="#">Delete</a></button>
+                                                                </td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--модальное окно для удаления-->
+<div>
+    <div id="myModalDelete" class="modal fade" tabindex="-1">
+        <div id="DeleteModal"></div>
+    </div>
+</div>
+<!--модальное окно для обновления-->
+<div>
+    <div id="myModalEdit" class="modal fade" tabindex="-1">
+        <div id="EditModal"></div>
+    </div>
+</div>
+<!--<script src="/api/mainTable"></script>-->
+
+<script src="./mainTable.js"></script>
+<script src="../static/mainNewUser.js"></script>
+<script src="./editUser.js"></script>
+<script src="./deleteUser.js"></script>
+<script src="./mainRedirect.js"></script>
+
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</body>
+</html>

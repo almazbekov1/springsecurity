@@ -1,16 +1,24 @@
 package com.company.springSecurity.controller;
 
+import com.company.springSecurity.model.Role;
 import com.company.springSecurity.model.User;
+import com.company.springSecurity.service.RoleService;
+import com.company.springSecurity.service.RoleServiceImpl;
 import com.company.springSecurity.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @CrossOrigin
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
+
+    @Autowired
+    private RoleService roleService;
 
     @Autowired
     private UserService userRepo;
@@ -26,6 +34,10 @@ public class AdminController {
     public User addUser(@RequestBody User user){
         System.out.println("post mapping");
         System.out.println();
+        Set<Role> roles = new HashSet<>();
+        Role role = roleService.getRoleByID(2);
+        roles.add(role);
+        user.setRoles(roles);
         return userRepo.save(user);
     }
 
@@ -51,6 +63,12 @@ public class AdminController {
         System.out.println("delete success user id: "+id);
         userRepo.remove((long)id);
         return userRepo.findById((long)id);
+    }
+
+    @CrossOrigin
+    @GetMapping("/test")
+    public User test(){
+        return null;
     }
 
 
