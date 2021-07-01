@@ -7,11 +7,6 @@ import javax.persistence.*;
 
 @Entity
 @Table
-//@Data
-//@Setter
-//@Getter
-//@NoArgsConstructor
-//@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Role implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

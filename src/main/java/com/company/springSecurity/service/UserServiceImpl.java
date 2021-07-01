@@ -51,14 +51,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public User loadUserByUsername(String s) throws UsernameNotFoundException {
         List<User> users = findAll();
-//            User user = userRepository.findUserByUsername(s);
         return users.stream().filter(x -> x.getEmail().equals(s)).findAny().orElse(null);
 
     }
     @Override
     public User loadUserByFirstName(String s) throws UsernameNotFoundException {
         List<User> users = findAll();
-//            User user = userRepository.findUserByUsername(s);
         return users.stream().filter(x -> x.getFirstName().equals(s)).findAny().orElse(null);
 
     }

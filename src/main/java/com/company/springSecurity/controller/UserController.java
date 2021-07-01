@@ -26,38 +26,23 @@ public class UserController {
 
     @CrossOrigin
     @GetMapping("/test/{id}")
-//    @Controller
     public String test(@PathVariable Long id){
-        System.out.println(id);
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
         return "loading";
     }
     @CrossOrigin
     @GetMapping
     public User getUser(){
-        System.out.println("test");
-        System.out.println();
-        System.out.println();
-        System.out.println();
         List<GetId> ids = getIdRepository.findAll();
         GetId getId = ids.get(ids.size()-1);
         User user =  userService.findById(getId.getId());
-//        return ;
         return user;
     }
     @CrossOrigin
     @GetMapping("/get_id")
     public User getUserId(){
-        System.out.println("1 test");
         List<GetId> ids = getIdRepository.findAll();
         GetId getId = ids.get(ids.size()-1);
-        System.out.println("2 test");
-
         User user =  userService.findById(getId.getGet_id());
-//        return ;
         return user;
     }
 }

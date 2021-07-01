@@ -32,8 +32,6 @@ public class AdminController {
     @CrossOrigin
     @PostMapping
     public User addUser(@RequestBody User user){
-        System.out.println("post mapping");
-        System.out.println();
         Set<Role> roles = new HashSet<>();
         Role role = roleService.getRoleByID(2);
         roles.add(role);
@@ -44,9 +42,6 @@ public class AdminController {
     @CrossOrigin
     @GetMapping("/{id}")
     public User getUserById(@PathVariable("id") int id){
-        System.out.println("get id mapping");
-        System.out.println();
-
         return userRepo.findById((long)id);
     }
 
@@ -60,16 +55,15 @@ public class AdminController {
     @CrossOrigin
     @DeleteMapping("/{id}")
     public User deleteUser(@PathVariable("id") int id){
-        System.out.println("delete success user id: "+id);
         userRepo.remove((long)id);
         return userRepo.findById((long)id);
     }
 
-    @CrossOrigin
-    @GetMapping("/test")
-    public User test(){
-        return null;
-    }
+//    @CrossOrigin
+//    @GetMapping("/test")
+//    public User test(){
+//        return null;
+//    }
 
 
 }
