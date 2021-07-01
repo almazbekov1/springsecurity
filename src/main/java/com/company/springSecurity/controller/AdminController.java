@@ -1,7 +1,9 @@
 package com.company.springSecurity.controller;
 
+import com.company.springSecurity.model.GetId;
 import com.company.springSecurity.model.Role;
 import com.company.springSecurity.model.User;
+import com.company.springSecurity.repo.GetIdRepository;
 import com.company.springSecurity.service.RoleService;
 import com.company.springSecurity.service.RoleServiceImpl;
 import com.company.springSecurity.service.UserService;
@@ -22,6 +24,9 @@ public class AdminController {
 
     @Autowired
     private UserService userRepo;
+
+    @Autowired
+    private GetIdRepository getIdRepository;
 
     @CrossOrigin
     @GetMapping
@@ -49,6 +54,10 @@ public class AdminController {
     @PutMapping("/{id}")
     public User putUserId(@PathVariable("id") int id,@RequestBody User user){
         user.setId((long)id);
+        Set<Role> roles = new HashSet<>();
+        Role role = roleService.getRoleByID(2);
+        roles.add(role);
+        user.setRoles(roles);
         return userRepo.save(user);
     }
 
@@ -57,6 +66,23 @@ public class AdminController {
     public User deleteUser(@PathVariable("id") int id){
         userRepo.remove((long)id);
         return userRepo.findById((long)id);
+    }
+
+    @CrossOrigin
+    @GetMapping("/get_user")
+    public User getUser(){
+        List<GetId> ids = getIdRepository.findAll();
+        GetId getId = ids.get(ids.size()-1);
+        User user =  userRepo.findById(getId.getId());
+        return user;
+    }
+    @CrossOrigin
+    @GetMapping("/get_id")
+    public User getUserId(){
+        List<GetId> ids = getIdRepository.findAll();
+        GetId getId = ids.get(ids.size()-1);
+        User user =  userRepo.findById(getId.getGet_id());
+        return user;
     }
 
 //    @CrossOrigin

@@ -24,11 +24,11 @@ public class UserController {
     @Autowired
     private GetIdRepository getIdRepository;
 
-    @CrossOrigin
-    @GetMapping("/test/{id}")
-    public String test(@PathVariable Long id){
-        return "loading";
-    }
+//    @CrossOrigin
+//    @GetMapping("/test/{id}")
+//    public String test(@PathVariable Long id){
+//        return "loading";
+//    }
     @CrossOrigin
     @GetMapping
     public User getUser(){

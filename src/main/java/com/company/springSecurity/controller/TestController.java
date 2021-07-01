@@ -24,6 +24,8 @@ public class TestController {
 
     @GetMapping("/admin")
     public String get(Principal principal){
+        User user = userService.loadUserByFirstName(principal.getName());
+        getIdRepository.save(new GetId(user.getId()));
         return "admin";
     }
 
