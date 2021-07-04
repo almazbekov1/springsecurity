@@ -1,4 +1,3 @@
-
 // let userID;
 //
 // function getId(id) {
@@ -22,12 +21,12 @@ function getUserEdit(id, firstName, lastName, age, email) {
                     <button class="close" data-dismiss="modal">х</button>
                     <h4 class="modal-title">Заголовок окна</h4>
                 </div>
-                <div class="modal-body">
+                       <div class="modal-body">
                     <div class="container">
-                        <form role="form" class="form-horizontal" id="MainEditFinish">
+                                  <form role="form" class="form-horizontal" id="MainEditFinish">
                             <div class="form-group">
-                                <label for="MainFirstNameEdit" class="control-label col-md-2">First Name</label>
-                                <div class="col-md-6">
+                                        <label for="MainFirstNameEdit" class="control-label col-md-2">First Name</label>
+                                        <div class="col-md-6">
                                     <input type="text" class="form-control" id="MainFirstNameEdit" placeholder=${firstNameMain}>
 <!--                                                    <p class="help-block">Некая подсказка</p>-->
                                 </div>
@@ -79,10 +78,11 @@ function getUserEdit(id, firstName, lastName, age, email) {
             </div>
         </div>
 `;
-    document.querySelector("#EditModal").insertAdjacentHTML("afterbegin",html);
-    editUser = document.getElementById('MainEditFinish');
+    document.querySelector("#EditModal").insertAdjacentHTML("afterbegin", html);
 
-    editUser.addEventListener('submit',async function (event) {
+
+    editUser = document.getElementById('MainEditFinish');
+    editUser.addEventListener('submit', async function (event) {
         event.preventDefault()
         let emailEdit = document.getElementById('MainEmailEdit').value;
         let passwordEdit = document.getElementById('MainPasswordEdit').value;
@@ -90,17 +90,18 @@ function getUserEdit(id, firstName, lastName, age, email) {
         let lastNameEdit = document.getElementById('MainLastNameEdit').value;
         let ageEdit = document.getElementById('MainAgeEdit').value;
         const someData = {
-            email: getTest(emailEdit,email),
-            password: getTest(passwordEdit,passwordEdit),
-            firstName: getTest(firstNameEdit,firstName),
-            lastName: getTest(lastNameEdit,lastName),
-            age: getTest(ageEdit,age)
+            email: getTest(emailEdit, email),
+            password: getTest(passwordEdit, passwordEdit),
+            firstName: getTest(firstNameEdit, firstName),
+            lastName: getTest(lastNameEdit, lastName),
+            age: getTest(ageEdit, age)
         }
-        function getTest(name1,name2){
-            if (name1.length === 0){
+
+        function getTest(name1, name2) {
+            if (name1.length === 0) {
                 return name2;
                 console.log("if else")
-            }else return name1;
+            } else return name1;
         }
 
         putMethod = {
@@ -111,13 +112,13 @@ function getUserEdit(id, firstName, lastName, age, email) {
             body: JSON.stringify(someData) // We send data in JSON format
         }
 
-        console.log("editUser")
         url = `http://localhost:8080/admin/${idMain}`;
+
+
         fetch(url, putMethod)
             .then(response => response.json())
             .then(data => console.log(data)) // Manipulate the data retrieved back, if we want to do something with it
             .catch(err => console.log(err))
-        console.log("test redirect");
         MainRedirect();
     })
 }

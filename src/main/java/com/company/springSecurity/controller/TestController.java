@@ -34,5 +34,6 @@ public class TestController {
         User user = userService.loadUserByFirstName(principal.getName());
         getIdRepository.save(new GetId(user.getId()));
         return "user";
+
     }
 }
